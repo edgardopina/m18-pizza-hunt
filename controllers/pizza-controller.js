@@ -1,5 +1,5 @@
-// const { Pizza } = require('../models/Pizza');
-const { Pizza } = require('../models');
+const { Pizza } = require('../models/Pizza');
+// const { Pizza } = require('../models');
 
 const pizzaController = {
    //! get ALL pizzas - METHOD

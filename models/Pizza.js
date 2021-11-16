@@ -12,4 +12,4 @@ const PizzaSchema = new Schema({
 // create Pizza model using PizzaSchema
 const Pizza = model('Pizza', PizzaSchema);
 
-module.exports = Pizza; // exports the Pizza model
+module.exports = { Pizza }; // exports the Pizza model
