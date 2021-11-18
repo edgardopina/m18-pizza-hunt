@@ -86,6 +86,11 @@ const pizzaController = {
             res.status(400).json(err);
          });
    },
+   
+   
+   deleteALLPizza({ body }, res) {
+      Pizza.remove({}).then(dbCommentData => res.json(dbCommentData));
+   },
 };
 
 module.exports = pizzaController;

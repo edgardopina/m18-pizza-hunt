@@ -8,6 +8,7 @@ const {
    createPizza,
    updatePizza,
    deletePizza,
+   deleteALLPizza,
 } = require('../../controllers/pizza-controller');
 
 //! set up GET ALL and POST at /api/pizzas
@@ -24,5 +25,9 @@ router.route('/:id')
    .get(getPizzaById)
    .put(updatePizza)
    .delete(deletePizza);
+
+   router
+   .route('/')
+   .delete(deleteALLPizza);
 
 module.exports = router;
