@@ -61,6 +61,7 @@ const handlePizzaSubmit = event => {
       })
       .catch(error => {
          console.error(error);
+         saveRecord(formData);//! call to save in IndexedDB database 'new_pizza' when network fails
       });
 };
 
