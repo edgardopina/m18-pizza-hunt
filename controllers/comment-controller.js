@@ -15,7 +15,6 @@ const commentController = {
          .catch(err => res.json(err));
    },
 
-
    //* remove comment from pizza
    removeComment({ params }, res) {
       Comment.findOneAndDelete({ _id: params.commentId })
@@ -39,12 +38,14 @@ const commentController = {
          .catch(err => res.json(err));
    },
 
-   
    addReply({ params, body }, res) {
       Comment.findOneAndUpdate(
          { _id: params.commentId }, //* find commentId
          { $push: { replies: body } }, //* push boidy into replies
-         { new: true } //* return updated data
+         {
+            new: true, //* return updated data
+            runValidators: true, //* enable mongoose validators
+         }
       )
          .then(dbPizzaData => {
             if (!dbPizzaData) {
@@ -55,22 +56,21 @@ const commentController = {
          })
          .catch(err => res.json(err));
    },
-   
-   
+
    removeReply({ params }, res) {
       Comment.findOneAndUpdate(
-        { _id: params.commentId },
-        { $pull: { replies: { replyId: params.replyId } } }, //* remove replyId from replies array
-        { new: true }
+         { _id: params.commentId },
+         { $pull: { replies: { replyId: params.replyId } } }, //* remove replyId from replies array
+         { new: true }
       )
-        .then(dbPizzaData => res.json(dbPizzaData))
-        .catch(err => res.json(err));
-    },
-   
+         .then(dbPizzaData => res.json(dbPizzaData))
+         .catch(err => res.json(err));
+   },
+
    getComments({ body }, res) {
       Comment.find({}).then(dbCommentData => res.json(dbCommentData));
    },
-   
+
    deleteComments({ body }, res) {
       Comment.remove({}).then(dbCommentData => res.json(dbCommentData));
    },

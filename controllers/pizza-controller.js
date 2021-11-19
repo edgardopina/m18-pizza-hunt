@@ -1,8 +1,6 @@
 const { Pizza } = require('../models');
 
-
 const pizzaController = {
-   
    //! get ALL pizzas - METHOD
    getAllPizza(req, res) {
       Pizza.find({})
@@ -28,7 +26,7 @@ const pizzaController = {
             path: 'comments', //* collection to populate from
             select: '-__v', //* select all fields except __v
          })
-         .select ('-__v')
+         .select('-__v')
          .then(dbPizzaData => {
             if (!dbPizzaData) {
                res.status(404).json({ message: 'No pizza found with this id!' });
@@ -57,7 +55,10 @@ const pizzaController = {
       Pizza.findOneAndUpdate(
          { _id: params.id },
          body,
-         { new: true } //* return the updated version of the document
+         {
+            new: true,//* return the updated version of the document
+            runValidators: true, //* enable mongoose runValidators for this schema
+         } 
          //* the MongoDB and Mongoose methods .updateOne() and .updateMany(), update the doc without returning it
       )
          .then(dbPizzaData => {
@@ -86,8 +87,7 @@ const pizzaController = {
             res.status(400).json(err);
          });
    },
-   
-   
+
    deleteALLPizza({ body }, res) {
       Pizza.remove({}).then(dbCommentData => res.json(dbCommentData));
    },
