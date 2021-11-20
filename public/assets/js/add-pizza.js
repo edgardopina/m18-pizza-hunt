@@ -49,19 +49,21 @@ const handlePizzaSubmit = event => {
    fetch('/api/pizzas', {
       method: 'POST',
       headers: {
-        accept: 'application/json',
-        'Content-type': 'application/json'
+         accept: 'application/json',
+         'Content-type': 'application/json',
       },
       body: JSON.stringify(formData),
    })
-      .then(response => response.json())
-      .then(postResponse => {
+      .then(response => {
          alert('Pizza successfully created!');
-         console.log(postResponse);
+         response.json();
       })
+      // .then(postResponse => {
+      //    console.log('postResponse: ', postResponse);
+      // })
       .catch(error => {
          console.error(error);
-         saveRecord(formData);//! call to save in IndexedDB database 'new_pizza' when network fails
+         saveRecord(formData); //! call to save in IndexedDB database 'new_pizza' when network fails
       });
 };
 
