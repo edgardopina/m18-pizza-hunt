@@ -15,7 +15,8 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/pizza-hunt', {
    //useFindAndModify: false, //! use only for mongoose version 6+
    useNewUrlParser: true,
    useUnifiedTopology: true,
-});
+})
+   .catch(err => console.error(err));
 mongoose.set('debug', true); // log mongo queries being executed
 
 app.listen(PORT, () => console.log(`🌍 Connected on localhost:${PORT}`));
