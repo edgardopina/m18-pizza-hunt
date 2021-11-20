@@ -34,10 +34,7 @@ function getPizza() {
 }
 
 function printPizza(pizzaData) {
-   console.log(pizzaData);
-
    pizzaId = pizzaData._id;
-
    const { pizzaName, createdBy, createdAt, size, toppings, comments } = pizzaData;
 
    $pizzaName.textContent = pizzaName;
@@ -128,8 +125,7 @@ function handleNewCommentSubmit(event) {
          response.json();
       })
       .then(commentResponse => {
-         console.log(commentResponse);
-         location.reload();
+         window.location.reload();
       })
       .catch(error => {
          console.log(error);
@@ -142,7 +138,6 @@ function handleNewReplySubmit(event) {
    if (!event.target.matches('.reply-form')) {
       return false;
    }
-
    const commentId = event.target.getAttribute('data-commentid');
 
    const writtenBy = event.target.querySelector('[name=reply-name]').value;
@@ -154,8 +149,6 @@ function handleNewReplySubmit(event) {
 
    const formData = { writtenBy, replyBody };
    
-   console.log(`*******handleNewReplySubmit ~ pizzaId`, pizzaId);
-   console.log(`*******handleNewReplySubmit ~ commentId`, commentId);
    fetch(`/api/comments/${pizzaId}/${commentId}`, {
       method: 'PUT',
       headers: {
@@ -171,18 +164,16 @@ function handleNewReplySubmit(event) {
          response.json();
       })
       .then(commentResponse => {
-         console.log(commentResponse);
-         location.reload();
+         window.location.reload();
       })
       .catch(error => {
          console.log(error);
       });
-   
-   
 }
 
 $backBtn.addEventListener('click', function () {
-   window.history.back();
+   // window.histor.back();
+   window.location.replace('/');
 });
 
 $newCommentForm.addEventListener('submit', handleNewCommentSubmit);
