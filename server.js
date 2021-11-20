@@ -11,7 +11,7 @@ app.use(express.static('public'));
 app.use(require('./routes'));
 
 // get Mongoose connect when we start the app
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/pizza-hunt', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/pizza-hunt', {
    //useFindAndModify: false, //! use only for mongoose version 6+
    useNewUrlParser: true,
    useUnifiedTopology: true,
