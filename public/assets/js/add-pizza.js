@@ -55,12 +55,12 @@ const handlePizzaSubmit = event => {
       body: JSON.stringify(formData),
    })
       .then(response => {
-         alert('Pizza successfully created!');
          response.json();
       })
-      // .then(postResponse => {
-      //    console.log('postResponse: ', postResponse);
-      // })
+      .then(postResponse => {
+         alert('Pizza successfully created!');
+         console.log('postResponse: ', postResponse);
+      })
       .catch(error => {
          console.error(error);
          saveRecord(formData); //! call to save in IndexedDB database 'new_pizza' when network fails
